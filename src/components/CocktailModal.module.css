@@ -1,0 +1,260 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 2000;
+  overflow-y: auto;
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  background: var(--bg-secondary);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(26, 26, 36, 0.9);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+  z-index: 10;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.closeBtn:hover {
+  background: var(--bg-elevated);
+  color: var(--color-accent);
+  transform: rotate(90deg);
+  border-color: var(--color-accent);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  min-height: 500px;
+}
+
+.imageSection {
+  position: relative;
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+}
+
+.imageWrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.imageGlow {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 30px;
+  border-radius: 50%;
+  filter: blur(20px);
+  opacity: 0.4;
+}
+
+.details {
+  padding: 40px;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tag {
+  padding: 4px 12px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  border-radius: 20px;
+  background: rgba(85, 8, 22, 0.3);
+  color: #ff6b7a;
+  text-transform: capitalize;
+  border: 1px solid rgba(196, 30, 58, 0.3);
+}
+
+.name {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.description {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.meta {
+  display: flex;
+  gap: 24px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 24px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  text-transform: capitalize;
+}
+
+.metaItem svg {
+  color: #ff6b7a;
+}
+
+.section {
+  margin-bottom: 24px;
+}
+
+.section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 16px;
+  font-family: var(--font-body);
+  letter-spacing: 0.02em;
+}
+
+.ingredients {
+  list-style: none;
+}
+
+.ingredients li {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.amount {
+  min-width: 80px;
+  font-weight: 600;
+  color: #ff6b7a;
+  font-size: 0.9rem;
+}
+
+.ingredientName {
+  color: var(--color-text);
+}
+
+.steps {
+  list-style: none;
+  counter-reset: step-counter;
+}
+
+.steps li {
+  position: relative;
+  padding: 12px 0 12px 36px;
+  color: var(--color-text);
+  counter-increment: step-counter;
+}
+
+.steps li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #550816 0%, #8b1a2d 100%);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.garnish {
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(85, 8, 22, 0.2) 0%, rgba(139, 26, 45, 0.2) 100%);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  border: 1px solid rgba(196, 30, 58, 0.2);
+}
+
+.garnish span {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+  
+  .imageSection {
+    padding: 30px;
+    min-height: 250px;
+  }
+  
+  .imageWrapper {
+    max-width: 200px;
+  }
+  
+  .details {
+    padding: 24px;
+  }
+  
+  .name {
+    font-size: 1.5rem;
+  }
+  
+  .meta {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}

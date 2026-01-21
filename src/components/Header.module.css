@@ -1,0 +1,81 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  background: rgba(10, 10, 15, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoIcon {
+  width: 48px;
+  height: 48px;
+}
+
+.filterBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
+  background: transparent;
+  border-radius: 24px;
+  transition: all 0.3s ease;
+}
+
+.filterBtn:hover {
+  background: rgba(255, 0, 47, 0.25);
+}
+
+.filterBtn span {
+  position: relative;
+}
+
+.filterBtn span::after {
+  content: '▾';
+  margin-left: 4px;
+  font-size: 0.8em;
+}
+
+.searchBtn {
+  padding: 10px;
+  color: var(--color-text-muted);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.searchBtn:hover {
+  color: #ff6b7a;
+  background: rgba(85, 8, 22, 0.25);
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 0 16px;
+  }
+  
+  .filterBtn span {
+    display: none;
+  }
+  
+  .logoIcon {
+    width: 40px;
+    height: 40px;
+  }
+}
