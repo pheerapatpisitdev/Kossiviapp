@@ -49,10 +49,6 @@ npm run build
 npm run preview
 ```
 
-## Deployment
-
-This project is configured for deployment on Vercel. See `VERCEL_DEPLOY.md` for detailed instructions.
-
 ## License
 
 MIT
