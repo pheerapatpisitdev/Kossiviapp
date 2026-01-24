@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Wine, Droplets, Clock } from 'lucide-react';
 import { Cocktail } from '../types';
+import { lockBodyScroll, unlockBodyScroll } from '../lib/bodyScrollLock';
 import styles from './CocktailModal.module.css';
 
 interface CocktailModalProps {
@@ -9,7 +11,27 @@ interface CocktailModalProps {
 }
 
 export function CocktailModal({ cocktail, onClose }: CocktailModalProps) {
-  if (!cocktail) return null;
+  const [enableBackdropBlur, setEnableBackdropBlur] = useState(false);
+
+  useEffect(() => {
+    if (!cocktail) return;
+
+    lockBodyScroll();
+    return () => unlockBodyScroll();
+  }, [cocktail]);
+
+  useEffect(() => {
+    if (!cocktail) {
+      setEnableBackdropBlur(false);
+      return;
+    }
+
+    const id = window.setTimeout(() => setEnableBackdropBlur(true), 120);
+    return () => {
+      window.clearTimeout(id);
+      setEnableBackdropBlur(false);
+    };
+  }, [cocktail]);
 
   const strengthLabels = {
     'light': 'Light',
@@ -22,7 +44,7 @@ export function CocktailModal({ cocktail, onClose }: CocktailModalProps) {
     <AnimatePresence>
       {cocktail && (
         <motion.div
-          className={styles.overlay}
+          className={`${styles.overlay} ${enableBackdropBlur ? styles.blur : ''}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

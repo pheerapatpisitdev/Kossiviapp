@@ -9,10 +9,18 @@ interface CocktailCardProps {
 }
 
 export function CocktailCard({ cocktail, onClick, index }: CocktailCardProps) {
+  const preloadImage = () => {
+    const img = new Image();
+    img.src = cocktail.image;
+  };
+
   return (
     <motion.article
       className={styles.card}
       onClick={onClick}
+      onMouseEnter={preloadImage}
+      onFocus={preloadImage}
+      onTouchStart={preloadImage}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05, duration: 0.4 }}

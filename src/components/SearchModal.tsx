@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X } from 'lucide-react';
 import { Cocktail } from '../types';
+import { lockBodyScroll, unlockBodyScroll } from '../lib/bodyScrollLock';
 import styles from './SearchModal.module.css';
 
 interface SearchModalProps {
@@ -14,6 +15,13 @@ interface SearchModalProps {
 export function SearchModal({ isOpen, onClose, cocktails, onCocktailClick }: SearchModalProps) {
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    lockBodyScroll();
+    return () => unlockBodyScroll();
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {

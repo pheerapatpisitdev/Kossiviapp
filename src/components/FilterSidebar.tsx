@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Wine, Beer, Martini, GlassWater, Grape, Sparkles, FlaskConical, Citrus } from 'lucide-react';
 import { BaseSpirit, Strength, CocktailType } from '../types';
+import { lockBodyScroll, unlockBodyScroll } from '../lib/bodyScrollLock';
 import styles from './FilterSidebar.module.css';
 
 interface FilterSidebarProps {
@@ -58,6 +59,13 @@ export function FilterSidebar({
   onClear,
 }: FilterSidebarProps) {
   const hasFilters = selectedSpirit || selectedStrength || selectedType;
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    lockBodyScroll();
+    return () => unlockBodyScroll();
+  }, [isOpen]);
 
   return (
     <AnimatePresence>
