@@ -11,26 +11,13 @@ interface CocktailModalProps {
 }
 
 export function CocktailModal({ cocktail, onClose }: CocktailModalProps) {
-  const [enableBackdropBlur, setEnableBackdropBlur] = useState(false);
+  /* Removed delayed backdrop blur state for performance */
 
   useEffect(() => {
     if (!cocktail) return;
 
     lockBodyScroll();
     return () => unlockBodyScroll();
-  }, [cocktail]);
-
-  useEffect(() => {
-    if (!cocktail) {
-      setEnableBackdropBlur(false);
-      return;
-    }
-
-    const id = window.setTimeout(() => setEnableBackdropBlur(true), 120);
-    return () => {
-      window.clearTimeout(id);
-      setEnableBackdropBlur(false);
-    };
   }, [cocktail]);
 
   const strengthLabels = {
@@ -44,11 +31,13 @@ export function CocktailModal({ cocktail, onClose }: CocktailModalProps) {
     <AnimatePresence>
       {cocktail && (
         <motion.div
-          className={`${styles.overlay} ${enableBackdropBlur ? styles.blur : ''}`}
+          className={styles.overlay}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
           onClick={onClose}
+          style={{ willChange: 'opacity' }}
         >
           <motion.div
             className={styles.modal}
@@ -57,6 +46,7 @@ export function CocktailModal({ cocktail, onClose }: CocktailModalProps) {
             exit={{ opacity: 0, y: 50, scale: 0.95 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
+            style={{ willChange: 'transform, opacity' }}
           >
             <button className={styles.closeBtn} onClick={onClose}>
               <X size={24} />

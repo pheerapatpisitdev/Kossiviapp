@@ -11,10 +11,20 @@ interface CocktailGridProps {
 }
 
 export function CocktailGrid({ cocktails, title, subtitle, onCocktailClick }: CocktailGridProps) {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05
+      }
+    }
+  };
+
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        <motion.div 
+        <motion.div
           className={styles.header}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -26,16 +36,20 @@ export function CocktailGrid({ cocktails, title, subtitle, onCocktailClick }: Co
           <div className={styles.divider} />
         </motion.div>
 
-        <div className={styles.grid}>
+        <motion.div
+          className={styles.grid}
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+        >
           {cocktails.map((cocktail, index) => (
             <CocktailCard
               key={cocktail.id}
               cocktail={cocktail}
               onClick={() => onCocktailClick(cocktail)}
-              index={index}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

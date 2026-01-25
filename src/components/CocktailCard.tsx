@@ -5,10 +5,14 @@ import styles from './CocktailCard.module.css';
 interface CocktailCardProps {
   cocktail: Cocktail;
   onClick: () => void;
-  index: number;
 }
 
-export function CocktailCard({ cocktail, onClick, index }: CocktailCardProps) {
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+};
+
+export function CocktailCard({ cocktail, onClick }: CocktailCardProps) {
   const preloadImage = () => {
     const img = new Image();
     img.src = cocktail.image;
@@ -21,23 +25,22 @@ export function CocktailCard({ cocktail, onClick, index }: CocktailCardProps) {
       onMouseEnter={preloadImage}
       onFocus={preloadImage}
       onTouchStart={preloadImage}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05, duration: 0.4 }}
+      variants={itemVariants}
       whileHover={{ y: -8 }}
+      layout
     >
       <div className={styles.imageWrapper}>
-        <img 
-          src={cocktail.image} 
+        <img
+          src={cocktail.image}
           alt={cocktail.name}
           loading="lazy"
         />
-        <div 
+        <div
           className={styles.colorAccent}
           style={{ backgroundColor: cocktail.color }}
         />
       </div>
-      
+
       <div className={styles.content}>
         <h3 className={styles.name}>{cocktail.name}</h3>
         <div className={styles.tags}>
