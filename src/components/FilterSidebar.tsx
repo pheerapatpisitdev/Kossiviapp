@@ -59,6 +59,13 @@ export function FilterSidebar({
   onClear,
 }: FilterSidebarProps) {
   const hasFilters = selectedSpirit || selectedStrength || selectedType;
+  const [isDesktop, setIsDesktop] = React.useState(window.innerWidth >= 1024);
+
+  useEffect(() => {
+    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -66,6 +73,12 @@ export function FilterSidebar({
     lockBodyScroll();
     return () => unlockBodyScroll();
   }, [isOpen]);
+
+  const variants = {
+    initial: isDesktop ? { y: '-100%', x: 0 } : { x: '-100%', y: 0 },
+    animate: { x: 0, y: 0 },
+    exit: isDesktop ? { y: '-100%', x: 0 } : { x: '-100%', y: 0 },
+  };
 
   return (
     <AnimatePresence>
@@ -80,9 +93,10 @@ export function FilterSidebar({
           />
           <motion.aside
             className={styles.sidebar}
-            initial={{ x: '-100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '-100%' }}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={variants}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
           >
             <div className={styles.header}>
