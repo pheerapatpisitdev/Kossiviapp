@@ -11,7 +11,7 @@ function App() {
   const [selectedCocktail, setSelectedCocktail] = useState<Cocktail | null>(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  
+
   // Filter states
   const [selectedSpirit, setSelectedSpirit] = useState<BaseSpirit | null>(null);
   const [selectedStrength, setSelectedStrength] = useState<Strength | null>(null);
@@ -55,11 +55,11 @@ function App() {
 
   return (
     <div className="app">
-      <Header 
+      <Header
         onFilterClick={() => setIsFilterOpen(true)}
         onSearchClick={() => setIsSearchOpen(true)}
       />
-      
+
       <main>
         <CocktailGrid
           cocktails={filteredCocktails}
