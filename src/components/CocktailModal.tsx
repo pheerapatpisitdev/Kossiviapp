@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Wine, Droplets, Clock, GlassWater, Shaker } from 'lucide-react';
+import { X, Wine, Droplets, Clock, GlassWater, Martini } from 'lucide-react';
 import { Cocktail } from '../types';
 import { lockBodyScroll, unlockBodyScroll } from '../lib/bodyScrollLock';
 import styles from './CocktailModal.module.css';
@@ -91,7 +91,7 @@ export function CocktailModal({ cocktail, onClose }: CocktailModalProps) {
                   )}
                   {cocktail.method && (
                     <div className={styles.metaItem}>
-                      <Shaker size={18} />
+                      <Martini size={18} />
                       <span>{cocktail.method}</span>
                     </div>
                   )}
@@ -109,6 +109,13 @@ export function CocktailModal({ cocktail, onClose }: CocktailModalProps) {
                   </ul>
                 </div>
 
+                {cocktail.garnish && (
+                  <div className={styles.section}>
+                    <h3>Garnish</h3>
+                    <p className={styles.garnish}>{cocktail.garnish}</p>
+                  </div>
+                )}
+
                 <div className={styles.section}>
                   <h3>Preparation</h3>
                   <ol className={styles.steps}>
@@ -117,12 +124,6 @@ export function CocktailModal({ cocktail, onClose }: CocktailModalProps) {
                     ))}
                   </ol>
                 </div>
-
-                {cocktail.garnish && (
-                  <div className={styles.garnish}>
-                    <span>Garnish:</span> {cocktail.garnish}
-                  </div>
-                )}
               </div>
             </div>
           </motion.div>

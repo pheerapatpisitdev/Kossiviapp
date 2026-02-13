@@ -4,6 +4,7 @@ import { CocktailGrid } from './components/CocktailGrid';
 import { CocktailModal } from './components/CocktailModal';
 import { FilterSidebar } from './components/FilterSidebar';
 import { SearchModal } from './components/SearchModal';
+import { Footer } from './components/Footer';
 import { cocktails } from './data/cocktails';
 import { Cocktail, BaseSpirit, Strength, CocktailType } from './types';
 
@@ -99,6 +100,8 @@ function App() {
         cocktails={cocktails}
         onCocktailClick={setSelectedCocktail}
       />
+
+      <Footer />
     </div>
   );
 }

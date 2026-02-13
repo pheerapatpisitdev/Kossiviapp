@@ -22,8 +22,9 @@
 }
 
 .logoIcon {
-  width: 48px;
-  height: 48px;
+  height: 44px;
+  width: auto;
+  object-fit: contain;
 }
 
 .filterBtn {
@@ -75,7 +76,7 @@
   }
   
   .logoIcon {
-    width: 40px;
-    height: 40px;
+    height: 36px;
+    width: auto;
   }
 }

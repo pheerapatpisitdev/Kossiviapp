@@ -22,7 +22,8 @@
   max-height: 90vh;
   background: var(--bg-secondary);
   border-radius: 24px;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   will-change: transform, opacity;
@@ -97,8 +98,7 @@
 
 .details {
   padding: 40px;
-  overflow-y: auto;
-  max-height: 90vh;
+  min-height: 0;
 }
 
 .header {
