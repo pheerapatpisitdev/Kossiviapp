@@ -11,6 +11,8 @@ export interface Cocktail {
   ingredients: Ingredient[];
   preparation: string[];
   garnish?: string;
+  glassware?: string;
+  method?: string;
 }
 
 export interface Ingredient {

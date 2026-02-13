@@ -21,7 +21,14 @@ function App() {
     return cocktails.filter(cocktail => {
       if (selectedSpirit && cocktail.baseSpirit !== selectedSpirit) return false;
       if (selectedStrength && cocktail.strength !== selectedStrength) return false;
-      if (selectedType && cocktail.type !== selectedType) return false;
+      if (selectedType) {
+        // Special handling for 'classic' - filter by tags instead of type
+        if (selectedType === 'classic') {
+          if (!cocktail.tags.includes('Classic')) return false;
+        } else {
+          if (cocktail.type !== selectedType) return false;
+        }
+      }
       return true;
     });
   }, [selectedSpirit, selectedStrength, selectedType]);
