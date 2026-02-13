@@ -1,5 +1,8 @@
+import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Cocktail } from '../types';
+import { useLanguage } from '../context/LanguageContext';
+import { getTranslatedCocktail } from '../i18n/cocktailTranslations';
 import styles from './CocktailCard.module.css';
 
 interface CocktailCardProps {
@@ -13,9 +16,15 @@ const itemVariants = {
 };
 
 export function CocktailCard({ cocktail, onClick }: CocktailCardProps) {
+  const { locale } = useLanguage();
+  
+  const translatedCocktail = useMemo(() => {
+    return getTranslatedCocktail(cocktail, locale);
+  }, [cocktail, locale]);
+
   const preloadImage = () => {
     const img = new Image();
-    img.src = cocktail.image;
+    img.src = translatedCocktail.image;
   };
 
   return (
@@ -31,20 +40,20 @@ export function CocktailCard({ cocktail, onClick }: CocktailCardProps) {
     >
       <div className={styles.imageWrapper}>
         <img
-          src={cocktail.image}
-          alt={cocktail.name}
+          src={translatedCocktail.image}
+          alt={translatedCocktail.name}
           loading="lazy"
         />
         <div
           className={styles.colorAccent}
-          style={{ backgroundColor: cocktail.color }}
+          style={{ backgroundColor: translatedCocktail.color }}
         />
       </div>
 
       <div className={styles.content}>
-        <h3 className={styles.name}>{cocktail.name}</h3>
+        <h3 className={styles.name}>{translatedCocktail.name}</h3>
         <div className={styles.tags}>
-          {cocktail.tags.slice(0, 4).map((tag) => (
+          {translatedCocktail.tags.slice(0, 4).map((tag) => (
             <span key={tag} className={styles.tag}>
               {tag}
             </span>

@@ -1,8 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X } from 'lucide-react';
 import { Cocktail } from '../types';
 import { lockBodyScroll, unlockBodyScroll } from '../lib/bodyScrollLock';
+import { useLanguage } from '../context/LanguageContext';
+import { getSpiritLabel } from '../i18n/translations';
+import { getTranslatedCocktail } from '../i18n/cocktailTranslations';
 import styles from './SearchModal.module.css';
 
 interface SearchModalProps {
@@ -13,6 +16,7 @@ interface SearchModalProps {
 }
 
 export function SearchModal({ isOpen, onClose, cocktails, onCocktailClick }: SearchModalProps) {
+  const { locale, t } = useLanguage();
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -41,15 +45,28 @@ export function SearchModal({ isOpen, onClose, cocktails, onCocktailClick }: Sea
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  const filteredCocktails = cocktails.filter(cocktail => {
-    const searchLower = query.toLowerCase();
-    return (
+  // Search in both original (EN) and translated (TH) names
+  const filteredCocktails = useMemo(() => {
+    return cocktails.filter(cocktail => {
+      const searchLower = query.toLowerCase();
+      const translated = getTranslatedCocktail(cocktail, locale);
+      
+      return (
+      // Search in original English name
       cocktail.name.toLowerCase().includes(searchLower) ||
+      // Search in translated name
+      translated.name.toLowerCase().includes(searchLower) ||
+      // Search in spirit (using translated label)
+      getSpiritLabel(locale, cocktail.baseSpirit).toLowerCase().includes(searchLower) ||
       cocktail.baseSpirit.toLowerCase().includes(searchLower) ||
+      // Search in tags
       cocktail.tags.some(tag => tag.toLowerCase().includes(searchLower)) ||
-      cocktail.ingredients.some(i => i.name.toLowerCase().includes(searchLower))
-    );
-  });
+      // Search in ingredients (both original and translated)
+      cocktail.ingredients.some(i => i.name.toLowerCase().includes(searchLower)) ||
+      translated.ingredients.some(i => i.name.toLowerCase().includes(searchLower))
+      );
+    });
+  }, [cocktails, query, locale]);
 
   const handleSelect = (cocktail: Cocktail) => {
     onCocktailClick(cocktail);
@@ -79,7 +96,7 @@ export function SearchModal({ isOpen, onClose, cocktails, onCocktailClick }: Sea
               <input
                 ref={inputRef}
                 type="text"
-                placeholder="Search cocktails, ingredients, spirits..."
+                placeholder={t('searchPlaceholder')}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 className={styles.input}
@@ -94,36 +111,39 @@ export function SearchModal({ isOpen, onClose, cocktails, onCocktailClick }: Sea
                 {filteredCocktails.length > 0 ? (
                   <>
                     <div className={styles.resultHeader}>
-                      <span>{filteredCocktails.length} cocktails found</span>
+                      <span>{t('cocktailsFound', { n: filteredCocktails.length })}</span>
                     </div>
                     <ul className={styles.resultList}>
-                      {filteredCocktails.map((cocktail) => (
-                        <motion.li
-                          key={cocktail.id}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <button
-                            className={styles.resultItem}
-                            onClick={() => handleSelect(cocktail)}
+                      {filteredCocktails.map((cocktail) => {
+                        const translated = getTranslatedCocktail(cocktail, locale);
+                        return (
+                          <motion.li
+                            key={cocktail.id}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.2 }}
                           >
-                            <img src={cocktail.image} alt={cocktail.name} />
-                            <div className={styles.resultInfo}>
-                              <span className={styles.resultName}>{cocktail.name}</span>
-                              <span className={styles.resultMeta}>
-                                {cocktail.baseSpirit} • {cocktail.tags[0]}
-                              </span>
-                            </div>
-                          </button>
-                        </motion.li>
-                      ))}
+                            <button
+                              className={styles.resultItem}
+                              onClick={() => handleSelect(cocktail)}
+                            >
+                              <img src={translated.image} alt={translated.name} />
+                              <div className={styles.resultInfo}>
+                                <span className={styles.resultName}>{translated.name}</span>
+                                <span className={styles.resultMeta}>
+                                  {getSpiritLabel(locale, cocktail.baseSpirit)} • {cocktail.tags[0]}
+                                </span>
+                              </div>
+                            </button>
+                          </motion.li>
+                        );
+                      })}
                     </ul>
                   </>
                 ) : (
                   <div className={styles.noResults}>
-                    <p>No cocktails found for "{query}"</p>
-                    <span>Try searching for a different cocktail, ingredient, or spirit</span>
+                    <p>{t('noCocktailsFor', { q: query })}</p>
+                    <span>{t('tryDifferentSearch')}</span>
                   </div>
                 )}
               </div>
@@ -131,7 +151,7 @@ export function SearchModal({ isOpen, onClose, cocktails, onCocktailClick }: Sea
 
             {!query && (
               <div className={styles.suggestions}>
-                <p>Popular searches</p>
+                <p>{t('popularSearches')}</p>
                 <div className={styles.suggestionTags}>
                   {['Mojito', 'Whiskey', 'Tropical', 'Classic', 'Vodka'].map(tag => (
                     <button

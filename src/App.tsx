@@ -7,8 +7,11 @@ import { SearchModal } from './components/SearchModal';
 import { Footer } from './components/Footer';
 import { cocktails } from './data/cocktails';
 import { Cocktail, BaseSpirit, Strength, CocktailType } from './types';
+import { useLanguage } from './context/LanguageContext';
+import { getSpiritLabel, getTypeLabel, getStrengthLabel } from './i18n/translations';
 
 function App() {
+  const { locale, t } = useLanguage();
   const [selectedCocktail, setSelectedCocktail] = useState<Cocktail | null>(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -43,22 +46,10 @@ function App() {
   };
 
   const getTitle = () => {
-    if (selectedSpirit) {
-      return `${selectedSpirit.charAt(0).toUpperCase() + selectedSpirit.slice(1)} Cocktails`;
-    }
-    if (selectedType) {
-      return `${selectedType.charAt(0).toUpperCase() + selectedType.slice(1)} Cocktails`;
-    }
-    if (selectedStrength) {
-      const labels: Record<Strength, string> = {
-        'light': 'Light',
-        'medium': 'Medium',
-        'strong': 'Strong',
-        'extreme-strong': 'Extreme Strong',
-      };
-      return `${labels[selectedStrength]} Cocktails`;
-    }
-    return 'Cocktails';
+    if (selectedSpirit) return `${getSpiritLabel(locale, selectedSpirit)} ${t('cocktails')}`;
+    if (selectedType) return `${getTypeLabel(locale, selectedType)} ${t('cocktails')}`;
+    if (selectedStrength) return `${getStrengthLabel(locale, selectedStrength)} ${t('cocktails')}`;
+    return t('cocktails');
   };
 
   return (
@@ -72,7 +63,7 @@ function App() {
         <CocktailGrid
           cocktails={filteredCocktails}
           title={getTitle()}
-          subtitle={hasActiveFilters ? 'Filtered Results' : 'Popular'}
+          subtitle={hasActiveFilters ? t('filteredResults') : t('popular')}
           onCocktailClick={setSelectedCocktail}
         />
       </main>

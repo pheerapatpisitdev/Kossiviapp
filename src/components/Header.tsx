@@ -1,5 +1,6 @@
 import { Search, SlidersHorizontal } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 import styles from './Header.module.css';
 
 interface HeaderProps {
@@ -8,6 +9,8 @@ interface HeaderProps {
 }
 
 export function Header({ onFilterClick, onSearchClick }: HeaderProps) {
+  const { locale, setLocale, t } = useLanguage();
+
   return (
     <motion.header 
       className={styles.header}
@@ -17,16 +20,34 @@ export function Header({ onFilterClick, onSearchClick }: HeaderProps) {
     >
       <button className={styles.filterBtn} onClick={onFilterClick}>
         <SlidersHorizontal size={18} />
-        <span>Filter</span>
+        <span>{t('filter')}</span>
       </button>
 
       <a href="/" className={styles.logo}>
-        <img src="/logo.png" alt="Kossivi Bar Academy" className={styles.logoIcon} />
+        <img src="/logo.png" alt={t('logoAlt')} className={styles.logoIcon} />
       </a>
 
-      <button className={styles.searchBtn} onClick={onSearchClick}>
-        <Search size={22} />
-      </button>
+      <div className={styles.headerRight}>
+        <div className={styles.langToggle} role="group" aria-label="Language">
+          <button
+            type="button"
+            className={locale === 'en' ? styles.langActive : styles.langBtn}
+            onClick={() => setLocale('en')}
+          >
+            EN
+          </button>
+          <button
+            type="button"
+            className={locale === 'th' ? styles.langActive : styles.langBtn}
+            onClick={() => setLocale('th')}
+          >
+            TH
+          </button>
+        </div>
+        <button className={styles.searchBtn} onClick={onSearchClick}>
+          <Search size={22} />
+        </button>
+      </div>
     </motion.header>
   );
 }

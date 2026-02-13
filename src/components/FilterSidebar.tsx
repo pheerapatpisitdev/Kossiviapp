@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Wine, Beer, Martini, GlassWater, Grape, Sparkles, FlaskConical, Citrus } from 'lucide-react';
 import { BaseSpirit, Strength, CocktailType } from '../types';
 import { lockBodyScroll, unlockBodyScroll } from '../lib/bodyScrollLock';
+import { useLanguage } from '../context/LanguageContext';
+import { getSpiritLabel, getTypeLabel, getStrengthLabel } from '../i18n/translations';
 import styles from './FilterSidebar.module.css';
 
 interface FilterSidebarProps {
@@ -58,6 +60,7 @@ export function FilterSidebar({
   onTypeChange,
   onClear,
 }: FilterSidebarProps) {
+  const { locale, t } = useLanguage();
   const hasFilters = selectedSpirit || selectedStrength || selectedType;
   const [isDesktop, setIsDesktop] = React.useState(window.innerWidth >= 1024);
 
@@ -100,7 +103,7 @@ export function FilterSidebar({
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
           >
             <div className={styles.header}>
-              <h2>Filter</h2>
+              <h2>{t('filterTitle')}</h2>
               <button className={styles.closeBtn} onClick={onClose}>
                 <X size={24} />
               </button>
@@ -108,24 +111,24 @@ export function FilterSidebar({
 
             <div className={styles.content}>
               <div className={styles.section}>
-                <h3>Browse by Category</h3>
+                <h3>{t('browseByCategory')}</h3>
                 <div className={styles.options}>
-                  {types.map(({ value, label }) => (
+                  {types.map(({ value }) => (
                     <button
                       key={value}
                       className={`${styles.option} ${selectedType === value ? styles.active : ''}`}
                       onClick={() => onTypeChange(selectedType === value ? null : value)}
                     >
-                      {label}
+                      {getTypeLabel(locale, value)}
                     </button>
                   ))}
                 </div>
               </div>
 
               <div className={styles.section}>
-                <h3><Wine size={18} /> Base Spirit</h3>
+                <h3><Wine size={18} /> {t('baseSpirit')}</h3>
                 <div className={styles.spiritOptions}>
-                  {baseSpirits.map(({ value, label, color, icon }) => (
+                  {baseSpirits.map(({ value, color, icon }) => (
                     <button
                       key={value}
                       className={`${styles.spiritOption} ${selectedSpirit === value ? styles.active : ''}`}
@@ -137,22 +140,22 @@ export function FilterSidebar({
                       >
                         {icon}
                       </span>
-                      {label}
+                      {getSpiritLabel(locale, value)}
                     </button>
                   ))}
                 </div>
               </div>
 
               <div className={styles.section}>
-                <h3>Strength</h3>
+                <h3>{t('strength')}</h3>
                 <div className={styles.options}>
-                  {strengths.map(({ value, label }) => (
+                  {strengths.map(({ value }) => (
                     <button
                       key={value}
                       className={`${styles.option} ${selectedStrength === value ? styles.active : ''}`}
                       onClick={() => onStrengthChange(selectedStrength === value ? null : value)}
                     >
-                      {label}
+                      {getStrengthLabel(locale, value)}
                     </button>
                   ))}
                 </div>
@@ -162,7 +165,7 @@ export function FilterSidebar({
             {hasFilters && (
               <div className={styles.footer}>
                 <button className={styles.clearBtn} onClick={onClear}>
-                  Clear All Filters
+                  {t('clearAllFilters')}
                 </button>
               </div>
             )}
