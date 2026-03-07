@@ -1,6 +1,6 @@
 import type { BaseSpirit, Strength, CocktailType } from '../types';
 
-export type Locale = 'en' | 'th';
+export type Locale = 'en' | 'fr';
 
 export const translations = {
   en: {
@@ -30,7 +30,7 @@ export const translations = {
     strength_strong: 'Strong',
     strength_extremeStrong: 'Extreme Strong',
 
-    // Spirits (same as value for EN, can override for TH)
+    // Spirits (same as value for EN, can override for FR)
     spirit_vodka: 'Vodka',
     spirit_rum: 'Rum',
     spirit_gin: 'Gin',
@@ -67,59 +67,59 @@ export const translations = {
     // Page title
     pageTitle: 'Kossivi - Cocktail Encyclopedia',
   },
-  th: {
-    filter: 'ตัวกรอง',
+  fr: {
+    filter: 'Filtre',
     logoAlt: 'Kossivi Bar Academy',
 
-    filterTitle: 'ตัวกรอง',
-    browseByCategory: 'เลือกตามหมวดหมู่',
-    baseSpirit: 'เหล้าฐาน',
-    strength: 'ความแรง',
-    clearAllFilters: 'ล้างตัวกรองทั้งหมด',
+    filterTitle: 'Filtre',
+    browseByCategory: 'Parcourir par catégorie',
+    baseSpirit: 'Spiritueux de base',
+    strength: 'Degré d\'alcool',
+    clearAllFilters: 'Effacer tous les filtres',
 
-    type_classic: 'คลาสสิก',
-    type_tropical: 'ทรอปิคอล',
-    type_martini: 'มาร์ตินี',
-    type_longdrink: 'ลองดริ้งค์',
-    type_short: 'ชอร์ต',
-    type_sparkling: 'มีฟองซ่า',
-    type_frozen: 'โฟรสเซน',
+    type_classic: 'Classique',
+    type_tropical: 'Tropical',
+    type_martini: 'Martini',
+    type_longdrink: 'Long drink',
+    type_short: 'Court',
+    type_sparkling: 'Pétillant',
+    type_frozen: 'Congelé',
 
-    strength_light: 'อ่อน',
-    strength_medium: 'ปานกลาง',
-    strength_strong: 'แรง',
-    strength_extremeStrong: 'แรงมาก',
+    strength_light: 'Léger',
+    strength_medium: 'Moyen',
+    strength_strong: 'Fort',
+    strength_extremeStrong: 'Très fort',
 
-    spirit_vodka: 'วอดก้า',
-    spirit_rum: 'รัม',
-    spirit_gin: 'จิน',
-    spirit_tequila: 'เทกิลา',
-    spirit_whiskey: 'วิสกี้',
-    spirit_brandy: 'แบรนดี',
-    spirit_wine: 'ไวน์',
-    spirit_champagne: 'แชมเปญ',
-    spirit_liqueur: 'ลิเคอร์',
-    spirit_beer: 'เบียร์',
-    spirit_cachaca: 'คาชาซา',
+    spirit_vodka: 'Vodka',
+    spirit_rum: 'Rhum',
+    spirit_gin: 'Gin',
+    spirit_tequila: 'Tequila',
+    spirit_whiskey: 'Whisky',
+    spirit_brandy: 'Brandy',
+    spirit_wine: 'Vin',
+    spirit_champagne: 'Champagne',
+    spirit_liqueur: 'Liqueur',
+    spirit_beer: 'Bière',
+    spirit_cachaca: 'Cachaça',
 
-    cocktails: 'ค็อกเทล',
-    popular: 'ยอดนิยม',
-    filteredResults: 'ผลการกรอง',
+    cocktails: 'Cocktails',
+    popular: 'Populaire',
+    filteredResults: 'Résultats filtrés',
 
-    searchPlaceholder: 'ค้นหาค็อกเทล ส่วนผสม เหล้า...',
-    cocktailsFound: (n: number) => `พบ ${n} รายการ`,
-    noCocktailsFor: (q: string) => `ไม่พบค็อกเทลสำหรับ "${q}"`,
-    tryDifferentSearch: 'ลองค้นหาค็อกเทล ส่วนผสม หรือเหล้าอื่น',
-    popularSearches: 'คำค้นหายอดนิยม',
+    searchPlaceholder: 'Rechercher cocktails, ingrédients, spiritueux...',
+    cocktailsFound: (n: number) => `${n} cocktail${n > 1 ? 's' : ''} trouvé${n > 1 ? 's' : ''}`,
+    noCocktailsFor: (q: string) => `Aucun cocktail trouvé pour « ${q} »`,
+    tryDifferentSearch: 'Essayez un autre cocktail, ingrédient ou spiritueux',
+    popularSearches: 'Recherches populaires',
 
-    ingredients: 'ส่วนผสม',
-    garnish: 'ของตกแต่ง',
-    preparation: 'วิธีทำ',
+    ingredients: 'Ingrédients',
+    garnish: 'Décoration',
+    preparation: 'Préparation',
 
-    footerBy: 'แอปโดย Kossivi Professional Bar Academy',
-    footerCopyright: '© 2026 Kossivi สงวนลิขสิทธิ์',
+    footerBy: 'Application par Kossivi Professional Bar Academy',
+    footerCopyright: '© 2026 Kossivi. Tous droits réservés.',
 
-    pageTitle: 'Kossivi - สารานุกรมค็อกเทล',
+    pageTitle: 'Kossivi - Encyclopédie des cocktails',
   },
 } as const;
 

@@ -17,7 +17,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY) as Locale | null;
-      return saved === 'th' || saved === 'en' ? saved : 'en';
+      return saved === 'fr' || saved === 'en' ? saved : 'en';
     } catch {
       return 'en';
     }
@@ -43,7 +43,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   );
 
   useEffect(() => {
-    document.documentElement.lang = locale === 'th' ? 'th' : 'en';
+    document.documentElement.lang = locale === 'fr' ? 'fr' : 'en';
     document.title = translations[locale].pageTitle;
   }, [locale]);
 

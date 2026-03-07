@@ -38,10 +38,10 @@ export function Header({ onFilterClick, onSearchClick }: HeaderProps) {
           </button>
           <button
             type="button"
-            className={locale === 'th' ? styles.langActive : styles.langBtn}
-            onClick={() => setLocale('th')}
+            className={locale === 'fr' ? styles.langActive : styles.langBtn}
+            onClick={() => setLocale('fr')}
           >
-            TH
+            FR
           </button>
         </div>
         <button className={styles.searchBtn} onClick={onSearchClick}>
