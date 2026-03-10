@@ -48,6 +48,7 @@ export function CocktailCard({ cocktail, onClick }: CocktailCardProps) {
           className={styles.colorAccent}
           style={{ backgroundColor: translatedCocktail.color }}
         />
+        <div className={styles.nameOverlay}>{translatedCocktail.name}</div>
       </div>
 
       <div className={styles.content}>
