@@ -23,6 +23,7 @@ export const translations = {
     type_short: 'Short',
     type_sparkling: 'Sparkling',
     type_frozen: 'Frozen',
+    type_healthy: 'Healthy Drinks',
 
     // Strengths
     strength_light: 'Light',
@@ -84,6 +85,7 @@ export const translations = {
     type_short: 'Court',
     type_sparkling: 'Pétillant',
     type_frozen: 'Congelé',
+    type_healthy: 'Healthy Drinks',
 
     strength_light: 'Léger',
     strength_medium: 'Moyen',
@@ -145,6 +147,7 @@ const typeKeys: Record<CocktailType, keyof typeof translations.en> = {
   short: 'type_short',
   sparkling: 'type_sparkling',
   frozen: 'type_frozen',
+  healthy: 'type_healthy',
 };
 
 const strengthKeys: Record<Strength, keyof typeof translations.en> = {

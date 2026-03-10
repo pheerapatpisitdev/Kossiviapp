@@ -47,6 +47,7 @@ const types: { value: CocktailType; label: string }[] = [
   { value: 'short', label: 'Short' },
   { value: 'sparkling', label: 'Sparkling' },
   { value: 'frozen', label: 'Frozen' },
+  { value: 'healthy', label: 'Healthy Drinks' },
 ];
 
 export function FilterSidebar({

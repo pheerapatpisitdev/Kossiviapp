@@ -50,7 +50,8 @@ export type CocktailType =
   | 'longdrink' 
   | 'short' 
   | 'sparkling' 
-  | 'frozen';
+  | 'frozen'
+  | 'healthy';
 
 export interface FilterState {
   baseSpirit: BaseSpirit | null;

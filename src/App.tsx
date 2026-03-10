@@ -26,11 +26,15 @@ function App() {
       if (selectedSpirit && cocktail.baseSpirit !== selectedSpirit) return false;
       if (selectedStrength && cocktail.strength !== selectedStrength) return false;
       if (selectedType) {
-        // Special handling for 'classic' - filter by tags instead of type
+        // Special handling for some categories
         if (selectedType === 'classic') {
+          // Classic: filter by tag instead of type
           if (!cocktail.tags.includes('Classic')) return false;
-        } else {
-          if (cocktail.type !== selectedType) return false;
+        } else if (selectedType === 'healthy') {
+          // Healthy: show all explicitly healthy/non-alcoholic cocktails
+          if (!cocktail.tags.includes('Non-alcoholic')) return false;
+        } else if (cocktail.type !== selectedType) {
+          return false;
         }
       }
       return true;
