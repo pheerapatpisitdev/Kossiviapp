@@ -10,6 +10,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
+  padding-top: env(safe-area-inset-top);
   background: rgba(10, 10, 15, 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -107,7 +108,8 @@
 
 @media (max-width: 640px) {
   .header {
-    padding: 0 16px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
   
   .filterBtn span {
@@ -122,7 +124,8 @@
 
 @media (max-width: 400px) {
   .header {
-    padding: 0 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     gap: 8px;
   }
 
