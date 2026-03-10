@@ -117,3 +117,35 @@
     width: auto;
   }
 }
+
+@media (max-width: 400px) {
+  .header {
+    padding: 0 10px;
+    gap: 8px;
+  }
+
+  .filterBtn {
+    padding: 8px 12px;
+    gap: 6px;
+  }
+
+  .langToggle {
+    padding: 1px;
+  }
+
+  .langBtn,
+  .langActive {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
+
+  .searchBtn {
+    padding: 8px;
+  }
+
+  .filterBtn svg,
+  .searchBtn svg {
+    width: 18px;
+    height: 18px;
+  }
+}
