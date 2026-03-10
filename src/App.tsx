@@ -5,6 +5,7 @@ import { CocktailModal } from './components/CocktailModal';
 import { FilterSidebar } from './components/FilterSidebar';
 import { SearchModal } from './components/SearchModal';
 import { Footer } from './components/Footer';
+import { DailyRecommendations } from './components/DailyRecommendations';
 import { cocktails } from './data/cocktails';
 import { Cocktail, BaseSpirit, Strength, CocktailType } from './types';
 import { useLanguage } from './context/LanguageContext';
@@ -64,6 +65,11 @@ function App() {
       />
 
       <main>
+        <DailyRecommendations
+          cocktails={cocktails}
+          onCocktailClick={setSelectedCocktail}
+        />
+
         <CocktailGrid
           cocktails={filteredCocktails}
           title={getTitle()}

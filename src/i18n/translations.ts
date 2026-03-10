@@ -49,6 +49,10 @@ export const translations = {
     popular: 'Popular',
     filteredResults: 'Filtered Results',
 
+    // Daily recommendations
+    dailyRecommendationsTitle: 'Today\'s Recommendations',
+    dailyRecommendationsSubtitle: 'Two cocktails picked for you',
+
     // Search
     searchPlaceholder: 'Search cocktails, ingredients, spirits...',
     cocktailsFound: (n: number) => `${n} cocktails found`,
@@ -107,6 +111,9 @@ export const translations = {
     cocktails: 'Cocktails',
     popular: 'Populaire',
     filteredResults: 'Résultats filtrés',
+
+    dailyRecommendationsTitle: 'Suggestions du jour',
+    dailyRecommendationsSubtitle: 'Deux cocktails sélectionnés pour vous',
 
     searchPlaceholder: 'Rechercher cocktails, ingrédients, spiritueux...',
     cocktailsFound: (n: number) => `${n} cocktail${n > 1 ? 's' : ''} trouvé${n > 1 ? 's' : ''}`,
