@@ -16,7 +16,7 @@ export function DailyRecommendations({
   const { t } = useLanguage();
 
   const recommended = useMemo(() => {
-    const MAX_PER_DAY = 5;
+    const MAX_PER_DAY = 1;
     if (cocktails.length <= MAX_PER_DAY) return cocktails;
 
     const used = new Set<number>();
