@@ -55,7 +55,12 @@ export function CocktailModal({ cocktail, onClose }: CocktailModalProps) {
             <div className={styles.content}>
               <div className={styles.imageSection}>
                 <div className={styles.imageWrapper}>
-                  <img src={translatedCocktail.image} alt={translatedCocktail.name} />
+                  <img
+                    src={translatedCocktail.image}
+                    alt={translatedCocktail.name}
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <div 
                     className={styles.imageGlow}
                     style={{ backgroundColor: translatedCocktail.color }}

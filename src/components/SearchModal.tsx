@@ -127,7 +127,12 @@ export function SearchModal({ isOpen, onClose, cocktails, onCocktailClick }: Sea
                               className={styles.resultItem}
                               onClick={() => handleSelect(cocktail)}
                             >
-                              <img src={translated.image} alt={translated.name} />
+                              <img
+                                src={translated.image}
+                                alt={translated.name}
+                                loading="lazy"
+                                decoding="async"
+                              />
                               <div className={styles.resultInfo}>
                                 <span className={styles.resultName}>{translated.name}</span>
                                 <span className={styles.resultMeta}>
