@@ -3,6 +3,7 @@
   top: 0;
   left: 0;
   right: 0;
+  position: fixed;
   height: var(--header-height);
   margin: -3px -2px;
   box-sizing: content-box;
@@ -16,12 +17,15 @@
   -webkit-backdrop-filter: blur(12px);
   z-index: 1000;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
 }
 
 .logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 8px;
 }
 
 .logoIcon {
@@ -95,7 +99,7 @@
 }
 
 .searchBtn {
-  padding: 10px;
+  padding: 12px;
   color: var(--color-text-muted);
   border-radius: 50%;
   transition: all 0.3s ease;

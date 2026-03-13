@@ -9,7 +9,7 @@ interface HeaderProps {
 }
 
 export function Header({ onFilterClick, onSearchClick }: HeaderProps) {
-  const { locale, setLocale, t } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <motion.header 
@@ -28,24 +28,8 @@ export function Header({ onFilterClick, onSearchClick }: HeaderProps) {
       </a>
 
       <div className={styles.headerRight}>
-        <div className={styles.langToggle} role="group" aria-label="Language">
-          <button
-            type="button"
-            className={locale === 'en' ? styles.langActive : styles.langBtn}
-            onClick={() => setLocale('en')}
-          >
-            EN
-          </button>
-          <button
-            type="button"
-            className={locale === 'fr' ? styles.langActive : styles.langBtn}
-            onClick={() => setLocale('fr')}
-          >
-            FR
-          </button>
-        </div>
         <button className={styles.searchBtn} onClick={onSearchClick}>
-          <Search size={22} />
+          <Search size={28} />
         </button>
       </div>
     </motion.header>
