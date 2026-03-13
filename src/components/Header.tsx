@@ -1,6 +1,7 @@
 import { Search, SlidersHorizontal } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { AuthButtons } from './AuthButtons';
 import styles from './Header.module.css';
 
 interface HeaderProps {
@@ -44,6 +45,7 @@ export function Header({ onFilterClick, onSearchClick }: HeaderProps) {
             FR
           </button>
         </div>
+        <AuthButtons />
         <button className={styles.searchBtn} onClick={onSearchClick}>
           <Search size={22} />
         </button>

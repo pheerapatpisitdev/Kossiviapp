@@ -106,6 +106,95 @@
   background: rgba(85, 8, 22, 0.25);
 }
 
+.subscribeBtn {
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0b0b12;
+  background: linear-gradient(135deg, #f97316, #ec4899);
+  box-shadow: 0 8px 20px rgba(236, 72, 153, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.subscribeBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(236, 72, 153, 0.5);
+  opacity: 0.95;
+}
+
+.subscribeBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+.authWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.userEmail {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.authLoading {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Sign in with Google - ใช้สไตล์คล้ายปุ่ม Google */
+.googleSignInBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.googleSignInBtn:hover {
+  background: #f8f8f8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.googleSignInBtn:active {
+  background: #eee;
+}
+
+.logoutBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.logoutBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
 @media (max-width: 640px) {
   .header {
     padding-left: 16px;
@@ -152,5 +241,17 @@
   .searchBtn svg {
     width: 18px;
     height: 18px;
+  }
+
+  .googleSignInBtn span {
+    display: none;
+  }
+
+  .googleSignInBtn {
+    padding: 8px 10px;
+  }
+
+  .logoutBtn span {
+    display: none;
   }
 }
